@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: #020408;
+  --bg-panel: #060d14;
+  --bg-card: #0a1520;
+  --accent-cyan: #00e5ff;
+  --accent-green: #39ff14;
+  --accent-amber: #ffb300;
+  --accent-red: #ff1744;
+  --accent-purple: #d500f9;
+  --text-primary: #e0f7ff;
+  --text-secondary: #7ecfec;
+  --text-muted: #3a6a7a;
+  --border-glow: rgba(0, 229, 255, 0.15);
+  --border-subtle: rgba(0, 229, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-panel);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-cyan);
+  opacity: 0.3;
+  border-radius: 2px;
+}
+
+.scanline {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 229, 255, 0.015) 2px,
+    rgba(0, 229, 255, 0.015) 4px
+  );
+  z-index: 9999;
+}
+
+.glow-cyan {
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4), 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.4), 0 0 20px rgba(57, 255, 20, 0.1);
+}
+
+.glow-red {
+  box-shadow: 0 0 8px rgba(255, 23, 68, 0.6), 0 0 20px rgba(255, 23, 68, 0.2);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.8);
+}
+
+.border-glow {
+  border: 1px solid var(--border-glow);
+}
+
+.panel-bg {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+}
+
+@keyframes pulse-status {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  49% { opacity: 1; }
+  50% { opacity: 0; }
+  99% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.status-nominal { color: var(--accent-green); }
+.status-warning { color: var(--accent-amber); }
+.status-critical { color: var(--accent-red); }
+.status-unknown { color: var(--text-muted); }
